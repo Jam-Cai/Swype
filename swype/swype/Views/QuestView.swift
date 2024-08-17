@@ -58,6 +58,7 @@ struct QuestBlock: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 40, height: 40)
                 .foregroundColor(Color(hue: 0.572, saturation: 0.411, brightness: 0.934))
+                .padding(.leading)
             
             Spacer()
             VStack(alignment: .leading){
@@ -66,7 +67,7 @@ struct QuestBlock: View {
                     .font(.system(size: 15, weight: .semibold, design: .rounded))
                 ProgressBar(currentProgression: quest.currentProgression, finalProgression: quest.finalProgression)
             }
-            .padding()
+            .padding(.trailing)
             
         }
         .padding(40)

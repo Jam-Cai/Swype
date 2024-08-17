@@ -17,7 +17,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            HomeView()
+            VerticalVideoScroller()
                 .tabItem {
                     Image(systemName: "house")
                 }

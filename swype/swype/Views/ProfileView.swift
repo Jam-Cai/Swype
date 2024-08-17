@@ -25,6 +25,10 @@ struct ProfileView: View {
                 }
                 
             }
+            
+            Text(user.username)
+                .font(.system(size: 50, weight: .bold, design: .rounded))
+            
             .padding()
             AsyncImage(url: URL(string: user.profilePicture)) { image in
                 image
@@ -38,7 +42,7 @@ struct ProfileView: View {
                     .frame(width: 40, height: 40)
             }
             
-            Text(user.username)
+            Text(user.name)
                 .font(.system(size: 50, weight: .bold, design: .rounded))
             
             Text("⭐️Total XP: \(user.totalXp)")

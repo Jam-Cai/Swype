@@ -15,7 +15,7 @@ enum LeaderboardType: String, CaseIterable {
 struct LeaderboardView: View {
     
     @State private var selectedSide: LeaderboardType = .classroom
-            
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -30,22 +30,22 @@ struct LeaderboardView: View {
                 .padding()
                 
                 
-
+                
                 Spacer()
                 ChooseLeaderboardView(selectedLeaderboard: selectedSide)
                 Spacer()
                 
-         
+                
             }
             .navigationTitle("🏆 Leaderboard")
             .background(Color("Color"))
             
-
-
+            
+            
         }
         
         
-
+        
     }
 }
 
@@ -54,15 +54,15 @@ struct ChooseLeaderboardView: View {
     
     var selectedLeaderboard: LeaderboardType
     
-    let classUsers = classList
-    let schoolUsers = schoolList
+    let classUsers = sortedClassList
+    let schoolUsers = sortedSchoolList
     
     var body: some View {
         switch selectedLeaderboard {
-            case .classroom:
-                LeaderboardListView(users: classUsers)
-            case .school:
-                LeaderboardListView(users: schoolUsers)
+        case .classroom:
+            LeaderboardListView(users: classUsers)
+        case .school:
+            LeaderboardListView(users: schoolUsers)
         }
         
         
