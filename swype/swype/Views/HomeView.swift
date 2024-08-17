@@ -4,47 +4,91 @@ import AVKit
 // Video Model
 struct Video: Identifiable {
     let id = UUID()
-    let url: URL
+    let url: URL?
 }
 
 // Video Player View
 struct VideoPlayerView: View {
     let video: Video
-    @State private var player: AVPlayer
-    
-    init(video: Video) {
-        self.video = video
-        self._player = State(initialValue: AVPlayer(url: video.url))
-    }
-    
+    @State private var player: AVPlayer?
+    @Binding var isPlaying: Bool // State to control whether this video should play
+
     var body: some View {
         VStack {
-            VideoPlayer(player: player)
-                .onAppear {
-                    player.play()
-                }
-                .onDisappear {
-                    player.pause()
-                }
-                .frame(height: UIScreen.main.bounds.height * 0.75)
-                .edgesIgnoringSafeArea(.all)
+            if let player = player {
+                VideoPlayer(player: player)
+                    .onAppear {
+                        if isPlaying {
+                            player.play()
+                        }
+                    }
+                    .onChange(of: isPlaying) { playing in
+                        if playing {
+                            player.play()
+                        } else {
+                            player.pause()
+                        }
+                    }
+                    .onDisappear {
+                        player.pause()
+                    }
+                    .frame(height: UIScreen.main.bounds.height * 0.75)
+                    .edgesIgnoringSafeArea(.all)
+            } else {
+                Text("Unable to load video")
+                    .foregroundColor(.red)
+                    .frame(height: UIScreen.main.bounds.height * 0.75)
+                    .edgesIgnoringSafeArea(.all)
+            }
+        }
+        .onAppear {
+            if let url = video.url {
+                player = AVPlayer(url: url)
+            }
         }
     }
 }
-
-struct TikTokStyleVideoPlayer: View {
+struct ScrollStyleVideoPlayer: View {
     let videos: [Video]
-    
+    @State private var currentVideoId: UUID? = nil
+
     var body: some View {
         ScrollView {
-            ForEach(videos) { video in
-                VideoPlayerView(video: video)
+            LazyVStack {
+                ForEach(videos) { video in
+                    GeometryReader { geometry in
+                        VideoPlayerView(video: video, isPlaying: .constant(currentVideoId == video.id))
+                            .onAppear {
+                                updateCurrentVideo(geometry: geometry, video: video)
+                            }
+                            .onChange(of: geometry.frame(in: .global).minY) { _ in
+                                updateCurrentVideo(geometry: geometry, video: video)
+                            }
+                            .frame(height: UIScreen.main.bounds.height)
+                    }
+                    .frame(height: UIScreen.main.bounds.height)
+                }
+            }
+        }
+        .edgesIgnoringSafeArea(.all)
+    }
+
+    private func updateCurrentVideo(geometry: GeometryProxy, video: Video) {
+        let minY = geometry.frame(in: .global).minY
+        let maxY = geometry.frame(in: .global).maxY
+        let screenHeight = UIScreen.main.bounds.height
+
+        if minY >= 0 && maxY <= screenHeight * 1.5 {
+            if currentVideoId != video.id {
+                DispatchQueue.main.async {
+                    currentVideoId = video.id
+                }
             }
         }
     }
 }
 
-// Main Vertical Scroller View
+
 struct HomeView: View {
     var body: some View {
         let videos = [
@@ -52,8 +96,9 @@ struct HomeView: View {
             Video(url: URL(string: "https://github.com/Jam-Cai/Swype/raw/main/swype/democlips/skip1.mp4")!),
             Video(url: URL(string: "https://github.com/Jam-Cai/Swype/raw/main/swype/democlips/geometry_quiz.mp4")!)
         ]
-        
-        TikTokStyleVideoPlayer(videos: videos)
+
+        ScrollStyleVideoPlayer(videos: videos)
             .edgesIgnoringSafeArea(.all)
     }
 }
+
