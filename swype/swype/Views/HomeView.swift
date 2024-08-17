@@ -4,43 +4,32 @@ import AVKit
 // Video Model
 struct Video: Identifiable {
     let id = UUID()
-    let file: String
-    
-    var url: URL? {
-            return Bundle.main.url(forResource: file, withExtension: nil)
-    }
-    
+    let url: URL
 }
 
 // Video Player View
 struct VideoPlayerView: View {
     let video: Video
-    @State private var player: AVPlayer?
+    @State private var player: AVPlayer
+    
+    init(video: Video) {
+        self.video = video
+        self._player = State(initialValue: AVPlayer(url: video.url))
+    }
     
     var body: some View {
-            VStack {
-                if let player = player {
-                    VideoPlayer(player: player)
-                        .onAppear {
-                            player.play()
-                        }
-                        .onDisappear {
-                            player.pause()
-                        }
-                        .frame(height: UIScreen.main.bounds.height * 0.75)
-                        .edgesIgnoringSafeArea(.all)
-                } else {
-                    Text("Video not found")
-                        .foregroundColor(.red)
+        VStack {
+            VideoPlayer(player: player)
+                .onAppear {
+                    player.play()
                 }
-                
-            }
-            .onAppear {
-                if let url = video.url {
-                    player = AVPlayer(url: url)
+                .onDisappear {
+                    player.pause()
                 }
-            }
+                .frame(height: UIScreen.main.bounds.height * 0.75)
+                .edgesIgnoringSafeArea(.all)
         }
+    }
 }
 
 struct TikTokStyleVideoPlayer: View {
@@ -59,7 +48,9 @@ struct TikTokStyleVideoPlayer: View {
 struct HomeView: View {
     var body: some View {
         let videos = [
-            Video(file: "geometry_quiz"),
+            Video(url: URL(string: "https://github.com/Jam-Cai/Swype/raw/main/swype/democlips/skip2.mp4")!),
+            Video(url: URL(string: "https://github.com/Jam-Cai/Swype/raw/main/swype/democlips/skip1.mp4")!),
+            Video(url: URL(string: "https://github.com/Jam-Cai/Swype/raw/main/swype/democlips/geometry_quiz.mp4")!)
         ]
         
         TikTokStyleVideoPlayer(videos: videos)

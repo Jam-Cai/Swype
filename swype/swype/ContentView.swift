@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct ContentView: View {
     
@@ -16,6 +17,8 @@ struct ContentView: View {
     }
     
     var body: some View {
+//        let videoURL = Bundle.main.url(forResource: "geometry_quiz", withExtension: "mp4")!
+//        player = AVPlayer(url: videoURL)
         TabView {
             HomeView()
                 .tabItem {
