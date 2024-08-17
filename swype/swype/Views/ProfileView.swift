@@ -32,7 +32,7 @@ struct ProfileView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 250, height: 250)
                     .clipShape(Circle())
-                    .overlay(Circle().stroke(Color(hue: 0.591, saturation: 0.764, brightness:        0.608), lineWidth: 10))
+                    .overlay(Circle().stroke(Color("Color 2"), lineWidth: 10))
             } placeholder: {
                 ProgressView()
                     .frame(width: 40, height: 40)
@@ -50,10 +50,10 @@ struct ProfileView: View {
             Spacer()
             
         }
-        .background(Color(hue: 0.591, saturation: 0.436, brightness: 0.772))
+        .background(Color("Color"))
     }
 }
 
 #Preview {
-    ProfileView(user: userList[0])
+    ProfileView(user: classList[0])
 }

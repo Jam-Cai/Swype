@@ -38,10 +38,13 @@ struct LeaderboardView: View {
          
             }
             .navigationTitle("🏆 Leaderboard")
-            .background(Color(red: 0.949, green: 0.949, blue: 0.969))
+            .background(Color("Color"))
+            
 
 
         }
+        
+        
 
     }
 }
@@ -51,8 +54,8 @@ struct ChooseLeaderboardView: View {
     
     var selectedLeaderboard: LeaderboardType
     
-    let classUsers = classUserList
-    let schoolUsers = schoolUserList
+    let classUsers = classList
+    let schoolUsers = schoolList
     
     var body: some View {
         switch selectedLeaderboard {
@@ -62,11 +65,12 @@ struct ChooseLeaderboardView: View {
                 LeaderboardListView(users: schoolUsers)
         }
         
+        
     }
     
     
 }
 
 #Preview {
-    ClassLeaderboardView()
+    LeaderboardView()
 }

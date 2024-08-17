@@ -9,13 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     
+    let yourUser = classList[0]
+    
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor(Color("Color"))
+    }
+    
     var body: some View {
         TabView {
             HomeView()
                 .tabItem {
                     Image(systemName: "house")
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.blue)
                 }
             LeaderboardView()
                 .tabItem {
@@ -25,13 +29,12 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "scroll")
                 }
-            ProfileView(user: userList[0])
+            ProfileView(user: yourUser)
                 .tabItem {
                     Image(systemName: "person")
                 }
         }
         .accentColor(.black)
-        .background(Color(hue: 0.517, saturation: 0.322, brightness: 0.818))
     }
 }
 

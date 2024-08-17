@@ -7,43 +7,46 @@
 
 import SwiftUI
 
-struct LeaderboardView: View {
+struct LeaderboardListView: View {
     
     let users: [UserModel]
     
     var body: some View {
-        List {
-            ForEach(users) { user in
-                NavigationLink(destination: ProfileView(user: user)) {
-                    HStack {
-                        AsyncImage(url: URL(string: user.profilePicture)) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 40, height: 40)
-                                .clipShape(Circle())
-                        } placeholder: {
-                            ProgressView()
-                                .frame(width: 40, height: 40)
-                        }
-                        
-                        Text(user.username)
-                            .bold()
-                        
-                        HStack {
-                            Spacer()
-                            Text("\(user.leaderboardXp)")
-                                .bold()
-                        }
-                        
-                        .padding(.vertical, 5)
+        List(users) { user in // no need for ForEach now!
+            NavigationLink(destination: ProfileView(user: user)) {
+                HStack {
+                    AsyncImage(url: URL(string: user.profilePicture)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 40, height: 40)
+                            .clipShape(Circle())
+                    } placeholder: {
+                        ProgressView()
+                            .frame(width: 40, height: 40)
                     }
+                    
+                    Text(user.username)
+                        .bold()
+                    
+                    HStack {
+                        Spacer()
+                        Text("\(user.leaderboardXp)")
+                            .bold()
+                    }
+                    
+                    .padding(.vertical, 5)
                 }
+                
+                
             }
+            
         }
+        .background(Color("Color"))
+        
     }
 }
 
 #Preview {
-    LeaderboardView(users: classUserList)
+    LeaderboardListView(users: classList)
 }
