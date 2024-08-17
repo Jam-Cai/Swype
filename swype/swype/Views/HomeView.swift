@@ -4,32 +4,43 @@ import AVKit
 // Video Model
 struct Video: Identifiable {
     let id = UUID()
-    let url: URL
+    let file: String
+    
+    var url: URL? {
+            return Bundle.main.url(forResource: file, withExtension: nil)
+    }
+    
 }
 
 // Video Player View
 struct VideoPlayerView: View {
     let video: Video
-    @State private var player: AVPlayer
-    
-    init(video: Video) {
-        self.video = video
-        self._player = State(initialValue: AVPlayer(url: video.url))
-    }
+    @State private var player: AVPlayer?
     
     var body: some View {
-        VStack {
-            VideoPlayer(player: player)
-                .onAppear {
-                    player.play()
+            VStack {
+                if let player = player {
+                    VideoPlayer(player: player)
+                        .onAppear {
+                            player.play()
+                        }
+                        .onDisappear {
+                            player.pause()
+                        }
+                        .frame(height: UIScreen.main.bounds.height * 0.75)
+                        .edgesIgnoringSafeArea(.all)
+                } else {
+                    Text("Video not found")
+                        .foregroundColor(.red)
                 }
-                .onDisappear {
-                    player.pause()
+                
+            }
+            .onAppear {
+                if let url = video.url {
+                    player = AVPlayer(url: url)
                 }
-                .frame(height: UIScreen.main.bounds.height * 0.75)
-                .edgesIgnoringSafeArea(.all)
+            }
         }
-    }
 }
 
 struct TikTokStyleVideoPlayer: View {
@@ -48,9 +59,7 @@ struct TikTokStyleVideoPlayer: View {
 struct HomeView: View {
     var body: some View {
         let videos = [
-            Video(url: URL(string: "https://github.com/Jam-Cai/Swype/blob/main/swype/democlips/geometry_quiz.mp4")!),
-            Video(url: URL(string: "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4")!),
-            Video(url: URL(string: "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4")!)
+            Video(file: "geometry_quiz"),
         ]
         
         TikTokStyleVideoPlayer(videos: videos)
