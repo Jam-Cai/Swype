@@ -2,7 +2,9 @@ import Foundation
 import SwiftUI
 
 
-struct UserModel {
+struct UserModel: Identifiable {
+    let id = UUID()
+    
     let username: String
     let name: String
     
@@ -15,7 +17,18 @@ struct UserModel {
     let profilePicture: String
 }
 
-struct fakePeople {
-    static let user1 = UserModel(username: "user1", name: "John Doe", totalXp: 50000, leaderboardXp: 6500, longestStreak: 67, currentStreak: 12, profilePicture: <#T##String#>)
-}
+let userList = [UserModel(username: "LePookie",
+                                name: "LeBron James",
+                                totalXp: 50000,
+                                leaderboardXp: 6500,
+                                longestStreak: 67,
+                                currentStreak: 12,
+                                profilePicture: "https://hoopshype.com/wp-content/uploads/sites/92/2024/02/i_54_cf_2e_lebron-james.png?w=1000&h=600&crop=1"),
+                      UserModel(username: "user2",
+                                  name: "John Doe",
+                                  totalXp: 50000,
+                                  leaderboardXp: 6500,
+                                  longestStreak: 67,
+                                  currentStreak: 12,
+                                  profilePicture: "https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png")]
 

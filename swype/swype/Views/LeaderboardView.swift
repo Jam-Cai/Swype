@@ -8,11 +8,46 @@
 import SwiftUI
 
 struct LeaderboardView: View {
+    
+    let users = userList
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            List {
+                ForEach(users) { user in
+                    NavigationLink(destination: ProfileView(user: user)) {
+                        HStack {
+                            AsyncImage(url: URL(string: user.profilePicture)) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
+                            } placeholder: {
+                                ProgressView()
+                                    .frame(width: 40, height: 40)
+                            }
+                            
+                            Text(user.username)
+                                .bold()
+                            
+                            HStack {
+                                Spacer()
+                                Text("\(user.leaderboardXp)")
+                                    .bold()
+                            }
+                            
+                            .padding(.vertical, 5)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("🏆 Leaderboard")
+        }
+        
     }
 }
-
+    
 #Preview {
     LeaderboardView()
 }
