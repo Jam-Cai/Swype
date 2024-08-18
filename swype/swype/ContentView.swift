@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  swype
-//
-//  Created by Richard Huang on 2024-08-16.
-//
-
 import SwiftUI
 import AVKit
 
@@ -17,8 +10,6 @@ struct ContentView: View {
     }
     
     var body: some View {
-//        let videoURL = Bundle.main.url(forResource: "geometry_quiz", withExtension: "mp4")!
-//        player = AVPlayer(url: videoURL)
         TabView {
             HomeView()
                 .tabItem {

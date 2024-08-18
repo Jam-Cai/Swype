@@ -1,17 +1,15 @@
 import SwiftUI
 import AVKit
 
-// Video Model
 struct Video: Identifiable {
     let id = UUID()
     let url: URL?
 }
 
-// Video Player View
 struct VideoPlayerView: View {
     let video: Video
     @State private var player: AVPlayer?
-    @Binding var isPlaying: Bool // State to control whether this video should play
+    @Binding var isPlaying: Bool 
 
     var body: some View {
         VStack {
