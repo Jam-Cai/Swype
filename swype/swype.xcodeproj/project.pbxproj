@@ -26,7 +26,6 @@
 		622CD0572C7117D800D51426 /* LeaderboardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardListView.swift; sourceTree = "<group>"; };
 		622CD05A2C71254700D51426 /* QuestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestModel.swift; sourceTree = "<group>"; };
 		622CD05E2C71489800D51426 /* RawLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawLists.swift; sourceTree = "<group>"; };
-		622CD0612C7151BA00D51426 /* geometry_quiz.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = geometry_quiz.mp4; path = ../../../../../../Downloads/geometry_quiz.mp4; sourceTree = "<group>"; };
 		62E60B792C7047C700A82EC4 /* swype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E60B7C2C7047C700A82EC4 /* swypeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swypeApp.swift; sourceTree = "<group>"; };
 		62E60B7E2C7047C700A82EC4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -49,14 +48,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		622CD0602C71516A00D51426 /* Videos */ = {
-			isa = PBXGroup;
-			children = (
-				622CD0612C7151BA00D51426 /* geometry_quiz.mp4 */,
-			);
-			path = Videos;
-			sourceTree = "<group>";
-		};
 		62E60B702C7047C700A82EC4 = {
 			isa = PBXGroup;
 			children = (
@@ -76,7 +67,6 @@
 		62E60B7B2C7047C700A82EC4 /* swype */ = {
 			isa = PBXGroup;
 			children = (
-				622CD0602C71516A00D51426 /* Videos */,
 				62E60B8F2C70F09600A82EC4 /* Views */,
 				62E60B8C2C70EE0A00A82EC4 /* Models */,
 				62E60B7C2C7047C700A82EC4 /* swypeApp.swift */,
